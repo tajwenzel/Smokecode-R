@@ -13,10 +13,11 @@ solver.function <- function(t,init,pars,...) {
   
   Pop<-B+Sc+Ec+Sj+Ej+Sy+Ey+Non+Ha+Na+Qa;
   
-  
+  #((Sc+Ec)*uc+(Sj+Ej)*uj+(Sy+Ey)*uy+(Non+Ha+Na+Qa)*ua+B*uc)
   with(as.list(combo), {
+    Pop<-B+Sc+Ec+Sj+Ej+Sy+Ey+Non+Ha+Na+Qa;
     
-    dB<- ((Sc+Ec)*uc+(Sj+Ej)*uj+(Sy+Ey)*uy+(Non+Ha+Na+Qa)*ua+B*uc)-B*uc-B*lj
+    dB<-((Sc+Ec)*uc+(Sj+Ej)*uj+(Sy+Ey)*uy+(Non+Ha+Na+Qa)*ua+B*ub)-B*ub-B*lj
     
     dSc <- B*lj-(Sc*betacc*Ec)/Pop-(Sc*betacc*phicj*Ej)/Pop-(Sc*betacc*phica*(Ey+Ha+Na))/Pop-Sc*lc-Sc*uc;
     
@@ -31,9 +32,9 @@ solver.function <- function(t,init,pars,...) {
     dEy <- (Sy*betayy*Ey)/Pop+(Sy*betaya*(Na+Ha))/Pop-Ey*ly+Ej*lj-Ey*uy;
     
     dNon<- Sy*ly-Non*ua;
-    dHa <- Ey*ly*0.1-Ha*ua;
-    dNa <- Ey*ly*0.9-q*Na-Na*ua;
-    dQa <- q*Na-Qa*ua;
+    dHa <- (Ey*0.1)*ly-Ha*ua;
+    dNa <- (Ey*0.9)*ly-q*Na-Na*ua;
+    dQa <- (q*Na)-Qa*ua;
     
     #####ODE list
     
